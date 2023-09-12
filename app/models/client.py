@@ -6,15 +6,18 @@ from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column, column_property
 
 from .general import Base
-from ..lib import get_val
+
+# from ..lib import get_val
+
+
+def get_val(obj, default):
+    return default if obj is None else obj
 
 
 class Client(Base):
     """Model of client"""
 
     __tablename__ = "client"
-
-    id: Mapped[int] = mapped_column(primary_key=True)
 
     # name of client
     firstname: Mapped[str] = mapped_column(String(100))
@@ -27,3 +30,6 @@ class Client(Base):
 
     # link to collection_id at Active
     actives: Mapped[Optional[int]]
+
+    def __str__(self) -> str:
+        return f"{'ORG' if self.is_org else 'CLT'} <{self.name}> INC {self.income}$"

@@ -1,16 +1,24 @@
 """General objects and params for all models"""
-from sqlalchemy.orm import DeclarativeBase
-import sqlalchemy as __sqlalch
+from datetime import datetime
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+import sqlalchemy
 from ..config import get_setting as __get_setting
 
-engine: __sqlalch.Engine
+engine: sqlalchemy.Engine
 
 
 class Base(DeclarativeBase):
     """Base"""
 
+    id: Mapped[int] = mapped_column(primary_key=True, unique=True, autoincrement=True)
+    created_at: Mapped[datetime] = mapped_column(default=datetime.now())
+    updated_at: Mapped[datetime] = mapped_column(
+        default=datetime.now(),
+        onupdate=datetime.now(),
+    )
 
-def __create_engine() -> __sqlalch.Engine:
+
+def __create_engine() -> sqlalchemy.Engine:
     """Set engine variable"""
 
     dialect = __get_setting("database/dialect", default="sqlite")
@@ -25,7 +33,7 @@ def __create_engine() -> __sqlalch.Engine:
     if user != "":
         passwd = f":{passwd}"
 
-    return __sqlalch.create_engine(
+    return sqlalchemy.create_engine(
         f"{dialect}{driver}://{user}{passwd}@{host}/{dbname}"
     )
 

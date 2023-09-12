@@ -1,4 +1,5 @@
 fastapi[all]
 toml
 SQLAlchemy
+alembic
 pytest
