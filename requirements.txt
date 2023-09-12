@@ -1,0 +1,4 @@
+fastapi[all]
+toml
+SQLAlchemy
+pytest

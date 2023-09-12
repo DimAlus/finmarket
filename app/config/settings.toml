@@ -1,0 +1,10 @@
+[app]
+docs_url = "/docs"
+
+[database]
+dialect = "sqlite"
+driver = "pysqlite"
+user = ""
+pass = ""
+host = ""
+dbname = ""
