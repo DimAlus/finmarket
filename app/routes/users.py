@@ -1,7 +1,7 @@
 """Routes for users"""
-from typing import Optional
+from typing import Optional, Any
 import json
-from fastapi import Request, Body, Response
+from fastapi import Body, Response
 from sqlalchemy import text
 from ..main import app
 
@@ -12,8 +12,9 @@ from ..models import engine, Client
 def get_clients():
     """index"""
 
-    # with engine.connect() as conn:
-    #     res = conn.execute(text("SELECT id FROM client"))
+    with engine.connect() as conn:
+        res = conn.execute(text("""SELECT * FROM active"""))
+    print(res.keys())
 
     return {"message": "ss"}
 

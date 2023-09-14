@@ -13,7 +13,7 @@ class Active(Base):
 
     collection_id: Mapped[int] = mapped_column(__type_pos=ForeignKey("client.actives"))
 
-    group: Mapped[int] = mapped_column(__type_pos=ForeignKey("active_type.id"))
+    group: Mapped[int] = mapped_column(__type_pos=ForeignKey("active_group.id"))
 
     # percent of income for action or mass dragmet
     weight: Mapped[float]

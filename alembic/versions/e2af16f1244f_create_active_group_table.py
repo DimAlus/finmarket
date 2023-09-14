@@ -1,8 +1,8 @@
-"""create client table
+"""create active_group table
 
-Revision ID: dc5eea4a29f6
-Revises: 
-Create Date: 2023-09-12 13:58:19.212105
+Revision ID: e2af16f1244f
+Revises: 2f2ddbda9a55
+Create Date: 2023-09-14 11:25:15.793430
 
 """
 from typing import Sequence, Union
@@ -12,17 +12,17 @@ import sqlalchemy as sa
 from alembic import op
 
 # revision identifiers, used by Alembic.
-revision: str = "dc5eea4a29f6"
-down_revision: Union[str, None] = None
+revision: str = "e2af16f1244f"
+down_revision: Union[str, None] = "2f2ddbda9a55"
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade() -> None:
-    "Construct table from Client object"
+    "Construct table from ActiveGroup object"
     if hasattr(op, "create_table"):
         op.create_table(
-            "client",
+            "active_group",
             sa.Column("id", sa.Integer, primary_key=True, nullable=False),
             sa.Column("created_at", sa.DateTime, nullable=False, default=dt.now),
             sa.Column(
@@ -32,15 +32,15 @@ def upgrade() -> None:
                 default=dt.now,
                 onupdate=dt.now,
             ),
-            sa.Column("firstname", sa.String(100), nullable=False),
-            sa.Column("lastname", sa.String(30)),
-            sa.Column("is_org", sa.Integer, nullable=False),
-            sa.Column("income", sa.Float),
-            sa.Column("actives", sa.Integer),
+            sa.Column(
+                "type", sa.Integer, sa.ForeignKey("active_type.id"), nullable=False
+            ),
+            sa.Column("owner", sa.Integer, nullable=False),
+            sa.Column("price", sa.Float, nullable=False),
         )
 
 
 def downgrade() -> None:
-    "Drop table from Client object"
+    "Drop table from ActiveGroup object"
     if hasattr(op, "drop_table"):
-        op.drop_table("client")
+        op.drop_table("active_group")

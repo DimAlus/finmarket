@@ -1,6 +1,7 @@
 *.overload.*
 *.log
-
+__test.py
+db.db
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,visualstudiocode,visualstudio
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,visualstudiocode,visualstudio
