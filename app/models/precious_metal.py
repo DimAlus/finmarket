@@ -11,7 +11,8 @@ class PreciousMetal(Base):
 
     __tablename__ = "precious_metal"
 
-    name: Mapped[str] = mapped_column(String(30), unique=True)
+    name: Mapped[str] = mapped_column(String(5), unique=True)
+    fullname: Mapped[str] = mapped_column(String(30))
 
     def __str__(self) -> str:
         return f"Metall type <{self.name}>"

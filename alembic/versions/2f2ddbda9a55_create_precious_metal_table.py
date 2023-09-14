@@ -40,7 +40,8 @@ def upgrade() -> None:
                 default=dt.now,
                 onupdate=dt.now,
             ),
-            sa.Column("name", sa.String(30), unique=True, nullable=False),
+            sa.Column("name", sa.String(5), unique=True, nullable=False),
+            sa.Column("fullname", sa.String(30), nullable=False),
         )
 
 
