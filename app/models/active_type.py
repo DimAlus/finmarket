@@ -11,7 +11,7 @@ class ActiveType(Base):
 
     __tablename__ = "active_type"
 
-    name: Mapped[str] = mapped_column(String(30))
+    name: Mapped[str] = mapped_column(String(30), unique=True)
 
     def __str__(self) -> str:
         return f"T<{self.name}>"
