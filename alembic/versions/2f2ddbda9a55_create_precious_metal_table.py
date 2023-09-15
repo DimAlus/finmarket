@@ -32,17 +32,22 @@ def upgrade() -> None:
                 autoincrement=True,
                 nullable=False,
             ),
-            sa.Column("created_at", sa.DateTime, nullable=False, default=dt.now),
+            sa.Column(
+                "created_at",
+                sa.DateTime,
+                nullable=False,
+                default=sa.func.now(),
+            ),
             sa.Column(
                 "updated_at",
                 sa.DateTime,
                 nullable=False,
-                default=dt.now,
-                onupdate=dt.now,
+                default=sa.func.now(),
+                onupdate=sa.func.now(),
             ),
             sa.Column("name", sa.String(5), unique=True, nullable=False),
             sa.Column("fullname", sa.String(30), nullable=False),
-        )
+        ).schema
 
 
 def downgrade() -> None:
